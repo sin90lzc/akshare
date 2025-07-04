@@ -1,7 +1,7 @@
 # config.py
 DB_USER = "admin"
 DB_PASSWORD = "mm753951"
-DB_HOST = "MariaDB-Official"
+DB_HOST = "mariadb"
 DB_PORT = 3306
 DB_NAME = "akshare"
 
