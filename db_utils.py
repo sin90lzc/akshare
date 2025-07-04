@@ -31,6 +31,6 @@ def get_daily_table(stock_code: str):
 def ensure_table(engine: Engine, table: Table):
     metadata.bind = engine
     try:
-        table.create(checkfirst=True)
+        table.create(bind=engine,checkfirst=True)
     except ProgrammingError as e:
         print(f"Error creating table {table.name}: {e}")
