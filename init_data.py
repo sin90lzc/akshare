@@ -43,6 +43,13 @@ def init_all_stocks(start_date):
     stock_codes = fetch_and_store_stock_list(engine)
 
     for code in stock_codes:
+        try:
+            code_num = int(code)
+            if code_num <= 2568:
+                continue
+        except ValueError:
+            continue
+            
         print(f"初始化 {code}")
         df = fetch_daily_data(code, start_date)
         table = get_daily_table(code)
