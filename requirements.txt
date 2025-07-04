@@ -1,0 +1,4 @@
+poetry
+akshare
+sqlalchemy
+pymysql
