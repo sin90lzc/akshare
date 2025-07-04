@@ -1,4 +1,8 @@
 # init_data.py
+import os
+
+os.environ["http_proxy"] = "http://192.168.1.7:1099"
+os.environ["https_proxy"] = "http://192.168.1.7:1099"
 import sys
 import akshare as ak
 from datetime import datetime
