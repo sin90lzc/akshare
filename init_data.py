@@ -47,7 +47,16 @@ def init_all_stocks(start_date):
         df = fetch_daily_data(code, start_date)
         table = get_daily_table(code)
         ensure_table(engine, table)
-        df.to_sql(table.name, con=engine, if_exists="append", index=False, method="multi")
+        # 分批处理数据，每1000条一批
+        batch_size = 1000
+        total_batches = (len(df) // batch_size) + 1
+        for i in range(total_batches):
+            start = i * batch_size
+            end = (i + 1) * batch_size
+            batch = df[start:end]
+            if not batch.empty:
+                batch.to_sql(table.name, con=engine, if_exists="append", index=False, method="multi")
+                print(f"已写入批次 {i+1}/{total_batches} ({len(batch)}条记录)")
 
         with engine.begin() as conn:
             stock_list = get_stock_list_table()
