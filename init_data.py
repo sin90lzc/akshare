@@ -45,7 +45,7 @@ def init_all_stocks(start_date):
     for code in stock_codes:
         try:
             code_num = int(code)
-            if code_num <= 2568:
+            if code_num <= 2569:
                 continue
         except ValueError:
             continue
