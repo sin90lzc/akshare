@@ -12,7 +12,8 @@ def get_stock_list_table():
         Column("name", String(100)),
         Column("board", String(50)),
         Column("list_date", Date),
-        Column("last_update", Date, nullable=True)
+        Column("last_update", Date, nullable=True),
+        extend_existing=True
     )
 
 def get_daily_table(stock_code: str):
@@ -25,7 +26,8 @@ def get_daily_table(stock_code: str):
         Column("close", Float),
         Column("volume", BigInteger),
         Column("amount", Float),
-        Column("turnover", Float)
+        Column("turnover", Float),
+        extend_existing=True
     )
 
 def ensure_table(engine: Engine, table: Table):
