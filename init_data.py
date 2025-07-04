@@ -5,7 +5,7 @@ from datetime import datetime
 from sqlalchemy.orm import sessionmaker
 from config import get_engine
 from db_utils import get_stock_list_table, get_daily_table, ensure_table
-
+import time
 def fetch_and_store_stock_list(engine):
     df = ak.stock_info_a_code_name()
     df["board"] = "A股"
@@ -31,6 +31,7 @@ def fetch_and_store_stock_list(engine):
 
 def fetch_daily_data(code, start_date):
     df = ak.stock_zh_a_hist(symbol=code, start_date=start_date.strftime('%Y%m%d'), adjust="")
+    time.sleep(3)  # 避免请求过快导致被限制
     df = df.rename(columns={
         "日期": "date", "开盘": "open", "最高": "high", "最低": "low", "收盘": "close",
         "成交量": "volume", "成交额": "amount", "换手率": "turnover"
